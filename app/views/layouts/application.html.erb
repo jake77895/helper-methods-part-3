@@ -46,7 +46,20 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           
           <li class="nav-item">
-            <%= link_to "Movies", movies_path, class: "navbar-link" %>
+            <%= link_to "Movies", movies_path, class: "nav-link" %>
+          </li>
+
+          <li class="nav-item">
+            <%= link_to "Edit profile", edit_user_registration_path(current_user), class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Sign out", destroy_user_session_path, class: "nav-link", data: { turbo_method: :delete } %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Log in", new_user_session_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Sign up", new_user_registration_path, class: "nav-link" %>
           </li>
         
         </ul>
@@ -58,14 +71,20 @@
     </div>
   </nav>
 
-    <div style="color: green;">
-      <%= notice %>
-    </div>
+    <div class="container mt-4">
+      <% if notice.present? %>
+        <div class="alert alert-success" role="alert">
+          <%= notice %>
+        </div>
+      <% end %>
 
-    <div style="color: red;">
-      <%= alert %>
+      <% if alert.present? %>
+        <div class="alert alert-danger" role="alert">
+          <%= alert %>
+        </div>
+      <% end %>
+        
+        <%= yield %>
     </div>
-    
-    <%= yield %>
   </body>
 </html>
